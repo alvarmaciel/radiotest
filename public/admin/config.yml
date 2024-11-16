@@ -6,9 +6,9 @@ media_folder: "static/images/uploads" # Where images will be stored in the repo
 public_folder: "/images/uploads" # Where the images will be accessible
 
 collections:
-  - name: "blog" # Used in the URL of the CMS, e.g., /admin/collections/blog
-    label: "Blog"
-    folder: "content/blog" # Folder for blog posts
+  - name: "posts" # Used in the URL of the CMS, e.g., /admin/collections/blog
+    label: "Posts"
+    folder: "content/posts" # Folder for blog posts
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
