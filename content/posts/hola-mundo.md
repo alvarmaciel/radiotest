@@ -4,3 +4,5 @@ draft: true
 title: Hola Mundo
 ---
 Este es el primer post
+
+![](/images/uploads/naruto2.jpg)
