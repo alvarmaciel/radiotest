@@ -6,13 +6,15 @@
     <description>Recent content in Posts on Radio San Javier</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2024 </copyright>
+    <managingEditor>youremail@example.com (Nombre de un autor)</managingEditor>
+    <webMaster>youremail@example.com (Nombre de un autor)</webMaster>
+    <copyright>© 2024 Nombre de un autor</copyright>
     <lastBuildDate>Sat, 16 Nov 2024 14:09:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Segundo artículo</title>
       <link>http://localhost:1313/posts/2024-11-16-segundo-art%C3%ADculo/</link>
       <pubDate>Sat, 16 Nov 2024 14:09:00 +0000</pubDate>
-      
+      <author>youremail@example.com (Nombre de un autor)</author>
       <guid>http://localhost:1313/posts/2024-11-16-segundo-art%C3%ADculo/</guid>
       <description></description>
       
@@ -22,7 +24,7 @@
       <title>Primer post</title>
       <link>http://localhost:1313/posts/2024-11-16-primer-post/</link>
       <pubDate>Sat, 16 Nov 2024 14:03:00 +0000</pubDate>
-      
+      <author>youremail@example.com (Nombre de un autor)</author>
       <guid>http://localhost:1313/posts/2024-11-16-primer-post/</guid>
       <description></description>
       

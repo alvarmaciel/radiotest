@@ -6,7 +6,9 @@
     <description>Recent content in Authors on Radio San Javier</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <copyright>© 2024 </copyright>
+    <managingEditor>youremail@example.com (Nombre de un autor)</managingEditor>
+    <webMaster>youremail@example.com (Nombre de un autor)</webMaster>
+    <copyright>© 2024 Nombre de un autor</copyright>
     <atom:link href="http://localhost:1313/authors/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

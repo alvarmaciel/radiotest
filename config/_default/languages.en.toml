@@ -14,16 +14,16 @@ title = "Radio San Javier"
   # description = "My awesome website"
   # copyright = "Copy, _right?_ :thinking_face:"
 
-# [params.author]
-#   name = "Your name here"
-#   email = "youremail@example.com"
-#   image = "img/blowfish_logo.png"
-#   imageQuality = 96
-#   headline = "I'm only human"
-#   bio = "A little bit about you"
-#   links = [
-#     { email = "mailto:hello@your_domain.com" },
-#     { link = "https://link-to-some-website.com/" },
+[params.author]
+  name = "Nombre de un autor"
+  email = "youremail@example.com"
+  image = "img/blowfish_logo.png"
+  imageQuality = 96
+  headline = "Una persona de la radio"
+  bio = "Bio"
+  links = [
+    { email = "mailto:hello@your_domain.com" },
+    { link = "https://link-to-some-website.com/" },
 #     { amazon = "https://www.amazon.com/hz/wishlist/ls/wishlist-id" },
 #     { apple = "https://www.apple.com" },
 #     { blogger = "https://username.blogspot.com/" },
@@ -70,4 +70,4 @@ title = "Radio San Javier"
 #     { youtube = "https://youtube.com/username" },
 #     { ko-fi = "https://ko-fi.com/username" },
 #     { codeberg = "https://codeberg.org/username"},
-#   ]
+   ]
