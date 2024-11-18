@@ -2,8 +2,10 @@ backend:
   name: git-gateway
   branch: main # Branch to update (e.g., main or master)
 
-media_folder: "static/images/uploads" # Where images will be stored in the repo
-public_folder: "/images/uploads" # Where the images will be accessible
+# media_folder: "static/images/uploads" # Where images will be stored in the repo
+# public_folder: "/images/uploads" # Where the images will be accessible
+media_folder: ''
+public_folder: ''
 
 collections:
   - name: "posts" # Used in the URL of the CMS, e.g., /admin/collections/blog
@@ -14,5 +16,5 @@ collections:
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "thumbnail", widget: "image", required: false}
+      - { label: "Featured Image", name: "featured", widget: "image", required: false}
       - { label: "Body", name: "body", widget: "markdown" }
