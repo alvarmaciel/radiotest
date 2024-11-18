@@ -1,66 +1,43 @@
-<!doctype html>
+<!DOCTYPE html>
+<html lang="{{ with .Site.Params.isoCode | default (.Site.LanguageCode | default " en") }} {{- . -}} {{ end }}" dir="{{ if .Site.Params.rtl | default false -}}
+    rtl
+  {{- else -}}
+    ltr
+  {{- end }}" class="scroll-smooth" data-default-appearance="{{ .Site.Params.defaultAppearance | default " light" }}"
+  data-auto-appearance="{{ .Site.Params.autoSwitchAppearance | default " true" }}">
+{{- partial "head.html" . -}}
 
-{{ $.Scratch.Delete "bg_color" }}<!---->
-{{ $.Scratch.Delete "social_list" }}<!---->
-{{ $.Scratch.Delete "avatar_url" }}<!---->
-
-<!-- bg_color -->
-{{ $color_map := dict "linen" "#faf8f1" "wheat" "#f8f5d7" "gray" "#fbfbfb"
-"light" "#fff" }}<!---->
-{{ $.Scratch.Set "bg_color" (index $color_map (site.Params.color | default
-(print "linen"))) }}<!---->
-{{ $bg_color := $.Scratch.Get "bg_color" }}<!---->
-
-<!-- social_list -->
-{{ $social_params := slice "twitter" "github" "instagram" "linkedin" "mastodon"
-"threads" "rss" }}<!---->
-{{ range $social_params }}<!---->
-{{ if isset site.Params . }}<!---->
-{{ $.Scratch.Add "social_list" (slice .) }}<!---->
-{{ end }}<!---->
-{{ end }}<!---->
-
-<!-- avatar_url -->
-{{ if site.Params.avatar }}<!---->
-{{ if in site.Params.avatar "http" }}<!---->
-{{ $.Scratch.Set "avatar_url" site.Params.avatar }}<!---->
-{{ else }}<!---->
-{{ $official_cdn := "https://www.gravatar.com/avatar/" }}<!---->
-{{ $cdn := (site.Params.gravatarCdn | default $official_cdn) }}<!---->
-{{ $md5 := (md5 site.Params.avatar) }}<!---->
-{{ $avatar_url := print $cdn $md5 "?s=160&d=identicon" }}<!---->
-{{ $.Scratch.Set "avatar_url" $avatar_url }}<!---->
-{{ end }}<!---->
-{{ end }}<!---->
-
-<html
-  class="not-ready lg:text-base"
-  style="--bg: {{ $bg_color }}"
-  lang="{{ or site.LanguageCode site.Language.Lang }}"
-  dir="{{ if site.Params.direction }}{{ site.Params.direction }}{{ else }}ltr{{ end }}"
->
-  {{ partial "head.html" . }}
-  <body class="text-black duration-200 ease-out dark:text-white">
-    {{ partial "header.html" . }}
-
-    <main
-      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-[--w] px-8 pb-16 pt-14 dark:prose-invert"
-    >
+<body
+  class="flex flex-col h-screen px-6 m-auto text-lg leading-7 max-w-7xl bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral sm:px-14 md:px-24 lg:px-32 scrollbar-thin scrollbar-track-neutral-200 scrollbar-thumb-neutral-400 dark:scrollbar-track-neutral-800 dark:scrollbar-thumb-neutral-600">
+  <div id="the-top" class="absolute flex self-center">
+    <a class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+      href="#main-content"><span
+        class="font-bold text-primary-600 ltr:pr-2 rtl:pl-2 dark:text-primary-400">&darr;</span>{{ i18n
+      "nav.skip_to_main" }}</a>
+  </div>
+  {{ $header := print "partials/header/" .Site.Params.header.layout ".html" }}
+  {{ if templates.Exists $header }}
+  {{ partial $header . }}
+  {{ else }}
+  {{ partial "partials/header/basic.html" . }}
+  {{ end }}
+  <div class="relative flex flex-col grow">
+    <main id="main-content" class="grow">
       {{ block "main" . }}{{ end }}
+      {{ if and (.Site.Params.footer.showScrollToTop | default true) (gt .WordCount 1) }}
+      {{- partial "scroll-to-top.html" . -}}
+      {{ end }}
     </main>
-
-    {{ partial "footer.html" . }}
-    <script>
-     if (window.netlifyIdentity) {
-       window.netlifyIdentity.on("init", user => {
-         if (!user) {
-           window.netlifyIdentity.on("login", () => {
-             document.location.href = "/admin/";
-           });
-         }
-       });
-     }
-    </script>
-
-  </body>
+    {{- partial "footer.html" . -}}
+    {{ if .Site.Params.enableSearch | default false }}
+    {{- partial "search.html" . -}}
+    {{ end }}
+  </div>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</body>
+{{ if .Site.Params.buymeacoffee.globalWidget | default false }}
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+  data-id="{{ .Site.Params.buymeacoffee.identifier }}" data-description="Support me on Buy me a coffee!" data-message="{{ .Site.Params.buymeacoffee.globalWidgetMessage | default "" }}"
+  data-color="{{ .Site.Params.buymeacoffee.globalWidgetColor | default "#FFDD00" }}" data-position="{{ .Site.Params.buymeacoffee.globalWidgetPosition | default "Left" }}" data-x_margin="18" data-y_margin="18"></script>
+{{ end }}
 </html>

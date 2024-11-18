@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Sitio de prueba para aprender a usarlo</title>
-    <link>https://radiotest-sanjavier.netlify.app/</link>
-    <description>Recent content on Sitio de prueba para aprender a usarlo</description>
-    <generator>Hugo</generator>
-    <language>en-us</language>
-    <lastBuildDate></lastBuildDate>
-    <atom:link href="https://radiotest-sanjavier.netlify.app/index.xml" rel="self" type="application/rss+xml" />
+    <title>Radio San Javier</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Radio San Javier</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© 2024 </copyright>
+    <lastBuildDate>Sat, 16 Nov 2024 14:09:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Segundo artículo</title>
+      <link>http://localhost:1313/posts/2024-11-16-segundo-art%C3%ADculo/</link>
+      <pubDate>Sat, 16 Nov 2024 14:09:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-11-16-segundo-art%C3%ADculo/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Primer post</title>
+      <link>http://localhost:1313/posts/2024-11-16-primer-post/</link>
+      <pubDate>Sat, 16 Nov 2024 14:03:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/posts/2024-11-16-primer-post/</guid>
+      <description></description>
+      
+    </item>
+    
   </channel>
 </rss>

@@ -1,4 +1,0 @@
-baseURL = 'https://radiotest-sanjavier.netlify.app/'
-languageCode = 'en-us'
-title = 'Sitio de prueba para aprender a usarlo'
-theme = 'paper'
