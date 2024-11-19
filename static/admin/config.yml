@@ -16,7 +16,11 @@ collections:
     media_folder: ""
     public_folder: ""
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "featured_{{slug}}", widget: "image"}
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "string" }
+      - { label: "Fecha de publicación", name: "date", widget: "datetime" }
+      - { label: "Categoría", name: "title", widget: "list", default: ["noticias"] }
+      - { label: "Etiquetas", name: "title", widget: "list", default: ["san javier"] }
+      - { label: "Imagen presentación", name: "image", widget: "image"}
+      - { label: "Imagen presentación ALT", name: "featureimage", widget: "image", media_folder: "static/images/uploads", public_folder: "/images/uploads" }
+      - { label: "Cuerpo", name: "body", widget: "markdown" }
