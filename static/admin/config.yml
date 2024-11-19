@@ -8,10 +8,15 @@ public_folder: "/images/uploads" # Where the images will be accessible
 collections:
   - name: "posts" # Used in the URL of the CMS, e.g., /admin/collections/blog
     label: "Posts"
+    label_singular: "Post"
     folder: "content/posts" # Folder for blog posts
     create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    #slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    path: "{{slig/index}}"
+    media_folder: ""
+    public_folder: ""
     fields:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Featured Image", name: "featured", widget: "image"}
       - { label: "Body", name: "body", widget: "markdown" }
