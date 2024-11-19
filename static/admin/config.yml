@@ -19,8 +19,8 @@ collections:
       - { label: "Título", name: "title", widget: "string" }
       - { label: "Descripción", name: "description", widget: "string" }
       - { label: "Fecha de publicación", name: "date", widget: "datetime" }
-      - { label: "Categoría", name: "title", widget: "list", default: ["noticias"] }
-      - { label: "Etiquetas", name: "title", widget: "list", default: ["san javier"] }
+      - { label: "Categoría", name: "categories", widget: "list", default: ["noticias"] }
+      - { label: "Etiquetas", name: "tags", widget: "list", default: ["san javier"] }
       - { label: "Imagen presentación", name: "image", widget: "image"}
       - { label: "Imagen presentación ALT", name: "featureimage", widget: "image", media_folder: "static/images/uploads", public_folder: "/images/uploads" }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
