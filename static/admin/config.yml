@@ -22,5 +22,5 @@ collections:
       - { label: "Categoría", name: "categories", widget: "list", default: ["noticias"], allow_add: true }
       - { label: "Etiquetas", name: "tags", widget: "list", default: ["san javier"], allow_add: true }
       - { label: "Imagen presentación", name: "image", widget: "image", required: false}
-      - { label: "Imagen presentación ALT", name: "featureimage", widget: "image", media_folder: "static/images/uploads", public_folder: "/images/uploads", required: false }
+      - { label: "Imagen presentación ALT", name: "featureimage", widget: "image", media_folder: "/static/images/uploads", public_folder: "/images/uploads", required: false }
       - { label: "Cuerpo", name: "body", widget: "markdown" }
