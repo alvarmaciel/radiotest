@@ -1,5 +1,6 @@
 #+title: Readme
 * Cosas que faltan
+- [ ] Mover theme de submodulo a app
 - [ ] Reproductor en el header
 - [ ] Footer con licencia
 - [ ] Página de grilla
