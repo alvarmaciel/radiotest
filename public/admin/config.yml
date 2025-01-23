@@ -6,17 +6,20 @@ media_folder: "static/images/uploads" # Where images will be stored in the repo
 public_folder: "/images/uploads" # Where the images will be accessible
 
 collections:
-  - name: "posts" # Used in the URL of the CMS, e.g., /admin/collections/blog
-    label: "Posts"
+  - label: "Posts"
+    name: "posts" # Used in the URL of the CMS, e.g., /admin/collections/blog
     label_singular: "Post"
     folder: "content/posts" # Folder for blog posts
     create: true
     #slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    path: "{{slig/index}}"
+    path: "{{slug}}/index"
     media_folder: ""
     public_folder: ""
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Featured Image", name: "featured", widget: "image"}
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Título", name: "title", widget: "string" }
+      - { label: "Descripción", name: "description", widget: "string", required: false }
+      - { label: "Fecha de publicación", name: "date", widget: "datetime" }
+      - { label: "Categoría", name: "categories", widget: "string", required: false }
+      - { label: "Etiquetas", name: "tags", widget: "string", required: false }
+      - { label: "Imagen presentación", name: "image", widget: "image", required: false}
+      - { label: "Cuerpo", name: "body", widget: "markdown" }

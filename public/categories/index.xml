@@ -6,9 +6,9 @@
     <description>Recent content in Categories on Radio San Javier</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <managingEditor>youremail@example.com (Nombre de un autor)</managingEditor>
-    <webMaster>youremail@example.com (Nombre de un autor)</webMaster>
-    <copyright>© 2024 Nombre de un autor</copyright>
+    <managingEditor>youremail@example.com (Radio San Javier)</managingEditor>
+    <webMaster>youremail@example.com (Radio San Javier)</webMaster>
+    <copyright>© 2025 Radio San Javier</copyright>
     <atom:link href="http://localhost:1313/categories/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

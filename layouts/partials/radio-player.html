@@ -1,0 +1,50 @@
+{{/* layouts/_default/index.html */}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Player</title>
+    {{/* Include other head elements or resources here */}}
+</head>
+<body>
+    {{/* Other page content */}}
+
+    <!-- Include the audio player here -->
+    <div class="radio-player">
+        <audio id="radio" controls>
+            <source src="https://streaming01.radiosenlinea.com.ar/9000/stream" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+
+    <style>
+        .radio-player {
+            text-align: center;
+            margin-top: 20px;
+        }
+        audio {
+            width: 100%;
+            max-width: 300px;
+        }
+    </style>
+
+    <script>
+     document.addEventListener('DOMContentLoaded', function () {
+         const radio = document.getElementById('radio');
+
+         // Optional: Automatically start playing when the page loads
+         radio.play().catch(error => {
+             console.log('Auto-play was prevented:', error);
+         });
+
+         // Optional: handle errors
+         radio.addEventListener('error', () => {
+             alert('Unable to load the radio stream. Please try again later.');
+         });
+     });
+    </script>
+
+    {{/* Other footer content */}}
+</body>
+</html>

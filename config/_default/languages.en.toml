@@ -15,11 +15,11 @@ title = "Radio San Javier"
   # copyright = "Copy, _right?_ :thinking_face:"
 
 [params.author]
-  name = "Nombre de un autor"
+  name = "Radio San Javier"
   email = "youremail@example.com"
-  image = "img/blowfish_logo.png"
+  image = "img/radio_logo_cropped.jpg"
   imageQuality = 96
-  headline = "Una persona de la radio"
+  headline = "La radio del pueblo"
   bio = "Bio"
   links = [
     { email = "mailto:hello@your_domain.com" },

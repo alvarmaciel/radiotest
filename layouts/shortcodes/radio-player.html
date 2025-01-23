@@ -1,0 +1,41 @@
+<!-- Here is a simple HTML audio player for the index page of a Hugo site that plays your radio stream -->
+
+<div class="radio-player">
+  <audio id="radio" controls>
+    <source src="https://streaming01.radiosenlinea.com.ar/9000/stream" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</div>
+
+<!-- Add some CSS for styling the player -->
+<style>
+ .radio-player {
+     text-align: center;
+     margin-top: 20px;
+ }
+ audio {
+     width: 100%;
+     max-width: 300px;
+ }
+</style>
+
+<!-- Include JavaScript for auto-playing or error handling -->
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+     const radio = document.getElementById('radio');
+
+     // Optional: Automatically start playing when the page loads
+     radio.play().catch(error => {
+         console.log('Auto-play was prevented:', error);
+     });
+
+     // Optional: handle errors
+     radio.addEventListener('error', () => {
+         alert('Unable to load the radio stream. Please try again later.');
+     });
+ });
+</script>
+
+<!-- To use this as a shortcode in Hugo, save this file as radio-player.html in layouts/shortcodes, and then include it in your markdown files using the following syntax:
+     {{ "{{< radio-player >}}" }}
+-->
