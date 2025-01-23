@@ -1,9 +1,9 @@
 #+title: Readme
 * Cosas que faltan
-** TODO Reproductor en el header
-** TODO Footer con licencia
-** TODO Página de grilla
-** TODO Página de cada programa
-** TODO Contacto
-** TODO Sobre la radio
-** TODO Definir esquema de publicidad
+- [ ] Reproductor en el header
+- [ ] Footer con licencia
+- [ ] Página de grilla
+- [ ] Página de cada programa
+- [ ] Contacto
+- [ ] Sobre la radio
+- [ ] Definir esquema de publicidad
