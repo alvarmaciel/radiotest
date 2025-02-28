@@ -1,50 +1,86 @@
-{{/* layouts/_default/index.html */}}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Radio Player</title>
-    {{/* Include other head elements or resources here */}}
-</head>
-<body>
-    {{/* Other page content */}}
+<div id="radioPlayerContainer" class="radio-player">
+    <audio id="radioPlayer" src="https://streaming01.radiosenlinea.com.ar/9000/stream"></audio>
+  <div class="player-controls">
+    <button id="playPauseBtn" class="btn">
+      <span class="play-icon">▶️</span>
+      <span class="pause-icon">⏸️</span>
+    </button>
+  </div>
+</div>
 
-    <!-- Include the audio player here -->
-    <div class="radio-player">
-        <audio id="radio" controls>
-            <source src="https://streaming01.radiosenlinea.com.ar/9000/stream" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
-    </div>
+<script>
+ document.addEventListener('DOMContentLoaded', function() {
+     const audio = document.getElementById('radioPlayer');
+     const playPauseBtn = document.getElementById('playPauseBtn');
+     const playIcon = playPauseBtn.querySelector('.play-icon');
+     const pauseIcon = playPauseBtn.querySelector('.pause-icon');
 
-    <style>
-        .radio-player {
-            text-align: center;
-            margin-top: 20px;
-        }
-        audio {
-            width: 100%;
-            max-width: 300px;
-        }
-    </style>
+     // Load state from localStorage
+     let isPlaying = localStorage.getItem('radioPlaying') === 'true';
+     let savedTime = parseFloat(localStorage.getItem('radioCurrentTime')) || 0;
 
-    <script>
-     document.addEventListener('DOMContentLoaded', function () {
-         const radio = document.getElementById('radio');
+     // Initialize audio
+     audio.currentTime = savedTime;
 
-         // Optional: Automatically start playing when the page loads
-         radio.play().catch(error => {
-             console.log('Auto-play was prevented:', error);
+     // Update button state
+     const updateButton = () => {
+         playIcon.style.display = isPlaying ? 'none' : 'inline';
+         pauseIcon.style.display = isPlaying ? 'inline' : 'none';
+     };
+
+     // Auto-resume playback if needed
+     if (isPlaying) {
+         audio.play().catch(error => {
+             console.log('Autoplay prevented:', error);
+             isPlaying = false;
+             localStorage.setItem('radioPlaying', 'false');
          });
+     }
+     updateButton();
 
-         // Optional: handle errors
-         radio.addEventListener('error', () => {
-             alert('Unable to load the radio stream. Please try again later.');
-         });
+     // Play/Pause handler
+     playPauseBtn.addEventListener('click', function() {
+         if (isPlaying) {
+             audio.pause();
+         } else {
+             audio.play();
+         }
+         isPlaying = !isPlaying;
+         localStorage.setItem('radioPlaying', isPlaying);
+         updateButton();
      });
-    </script>
 
-    {{/* Other footer content */}}
-</body>
-</html>
+     // Save playback position
+     audio.addEventListener('timeupdate', () => {
+         localStorage.setItem('radioCurrentTime', audio.currentTime);
+     });
+
+     // Handle audio end
+     audio.addEventListener('ended', () => {
+         isPlaying = false;
+         localStorage.setItem('radioPlaying', 'false');
+         updateButton();
+     });
+ });
+</script>
+
+<style>
+ .radio-player {
+     position: fixed;
+     bottom: 20px;
+     right: 20px;
+     background: rgba(255, 255, 255, 0.9);
+     padding: 10px;
+     border-radius: 8px;
+     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+ }
+
+ .player-controls .btn {
+     cursor: pointer;
+     background: none;
+     border: none;
+     padding: 5px;
+ }
+
+ .pause-icon { display: none; }
+</style>
