@@ -140,13 +140,28 @@
   
   <div style="padding-left:0;padding-right:0;padding-top:2px;padding-bottom:3px"
      class="main-menu flex items-center justify-between px-4 py-6 sm:px-6 md:justify-start space-x-3">
-    <div id="radioPlayerContainer" class="radio-player">
+    <div class="flex items-center">
+        
+        
+        <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">Radio San Javier</a>
+        
+        <div id="radioPlayerContainer" class="radio-player">
     <audio id="radioPlayer" src="https://streaming01.radiosenlinea.com.ar/9000/stream" preload="auto"></audio>
     <div class="player-controls">
         <button id="playPauseBtn" class="btn" aria-label="Play/Pause">
-            <span class="play-icon">▶️</span>
-            <span class="pause-icon">⏸️</span>
+            <svg class="play-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M8 5v14l11-7z"/>
+            </svg>
+            <svg class="pause-icon" viewBox="0 0 24 24" width="24" height="24">
+                <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+            </svg>
         </button>
+        <div class="volume-control">
+            <svg class="volume-icon" viewBox="0 0 24 24" width="18" height="18">
+                <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+            </svg>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="100">
+        </div>
     </div>
 </div>
 
@@ -154,31 +169,35 @@
 document.addEventListener('DOMContentLoaded', function () {
     const audio = document.getElementById('radioPlayer');
     const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeSlider = document.getElementById('volumeSlider');
     const playIcon = playPauseBtn.querySelector('.play-icon');
     const pauseIcon = playPauseBtn.querySelector('.pause-icon');
 
     let isPlaying = localStorage.getItem('radioPlaying') === 'true';
     let savedTime = parseFloat(localStorage.getItem('radioCurrentTime')) || 0;
+    let savedVolume = parseFloat(localStorage.getItem('radioVolume')) || 100;
 
     
-    audio.currentTime = savedTime;
+    audio.volume = savedVolume / 100;
+    volumeSlider.value = savedVolume;
 
     const updateButton = () => {
-        playIcon.style.display = isPlaying ? 'none' : 'inline';
-        pauseIcon.style.display = isPlaying ? 'inline' : 'none';
+        playIcon.style.display = isPlaying ? 'none' : 'block';
+        pauseIcon.style.display = isPlaying ? 'block' : 'none';
     };
 
     
     document.addEventListener('visibilitychange', () => {
         if (document.hidden) {
-            
             localStorage.setItem('radioPlaying', isPlaying);
             localStorage.setItem('radioCurrentTime', audio.currentTime);
+            localStorage.setItem('radioVolume', volumeSlider.value);
         } else {
-            
             isPlaying = localStorage.getItem('radioPlaying') === 'true';
             savedTime = parseFloat(localStorage.getItem('radioCurrentTime')) || 0;
-            audio.currentTime = savedTime;
+            savedVolume = parseFloat(localStorage.getItem('radioVolume')) || 100;
+            audio.volume = savedVolume / 100;
+            volumeSlider.value = savedVolume;
             if (isPlaying) {
                 audio.play().catch(error => {
                     console.log('Autoplay prevented:', error);
@@ -210,6 +229,12 @@ document.addEventListener('DOMContentLoaded', function () {
         updateButton();
     });
 
+    volumeSlider.addEventListener('input', function() {
+        const volumeValue = this.value;
+        audio.volume = volumeValue / 100;
+        localStorage.setItem('radioVolume', volumeValue);
+    });
+
     audio.addEventListener('timeupdate', () => {
         localStorage.setItem('radioCurrentTime', audio.currentTime);
     });
@@ -220,68 +245,158 @@ document.addEventListener('DOMContentLoaded', function () {
         updateButton();
     });
 
-    
     window.addEventListener('beforeunload', () => {
         localStorage.setItem('radioPlaying', isPlaying);
         localStorage.setItem('radioCurrentTime', audio.currentTime);
+        localStorage.setItem('radioVolume', volumeSlider.value);
     });
 });
 </script>
 
 <style>
- 
 .radio-player {
-    position: fixed;
-    bottom: 15px;
-    right: 15px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.95);
-    padding: 12px 16px;
-    border-radius: 50px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-    z-index: 1000;
+    margin-left: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px 12px;
+    border-radius: 6px;
+    backdrop-filter: blur(10px);
 }
 
- 
-@media (max-width: 768px) {
-    .radio-player {
-        bottom: 10px;
-        right: 10px;
-        padding: 8px 12px;
-    }
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
- 
 .player-controls .btn {
     cursor: pointer;
     background: transparent;
     border: none;
-    font-size: 24px;
-    padding: 5px;
-    transition: transform 0.2s;
+    padding: 6px;
+    color: var(--neutral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+
+.player-controls .btn:hover {
+    color: var(--primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-icon {
+    color: var(--neutral);
+    opacity: 0.8;
+}
+
+.volume-slider {
+    width: 80px;
+    height: 4px;
+    -webkit-appearance: none;
+    background: #666;
+    border-radius: 2px;
+    outline: none;
+    opacity: 1;
+    transition: all 0.2s;
+}
+
+.volume-slider:hover {
+    opacity: 1;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+    transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-progress {
+    background: #fff;
+    height: 4px;
+    border-radius: 2px;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
 }
 
  
-.player-controls .btn:hover {
-    transform: scale(1.1);
+.volume-slider::-moz-range-track {
+    height: 4px;
+    border-radius: 2px;
+    background: #666;
 }
 
  
 .pause-icon {
     display: none;
 }
+
+.play-icon, .pause-icon {
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .radio-player {
+        margin-left: 10px;
+        padding: 6px 8px;
+    }
+    
+    .volume-slider {
+        width: 60px;
+    }
+
+    .player-controls {
+        gap: 10px;
+    }
+
+    .player-controls .btn {
+        width: 32px;
+        height: 32px;
+        padding: 4px;
+    }
+}
 </style>
 
-    
-    <div class="flex flex-1 items-center justify-between">
-        <nav class="flex space-x-3">
-            
-            <a href="/" class="text-base font-medium text-gray-500 hover:text-gray-900">Radio San Javier</a>
-            
-        </nav>
+    </div>
+    <div class="flex flex-1 items-center justify-end">
         <nav class="hidden md:flex items-center space-x-5 md:ml-12 h-12">
             
             
@@ -315,7 +430,6 @@ document.addEventListener('DOMContentLoaded', function () {
             </button>
             
 
-
             
             
             <div
@@ -344,7 +458,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 </button>
             </div>
             
-
         </nav>
         <div class="flex md:hidden items-center space-x-5 md:ml-12 h-12">
 
